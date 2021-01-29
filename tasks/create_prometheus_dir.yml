@@ -1,0 +1,12 @@
+---
+  - name: Creating Prometheus working directory, Prometheus data directories and setting ownership.
+    file:
+      path: "{{item}}"
+      group: prometheus
+      owner: prometheus
+      recurse: yes
+      state: directory
+    become: true
+    with_items:
+      - "{{prometheus_dir}}/"
+      - "{{prometheus_dir}}/data"

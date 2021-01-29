@@ -1,0 +1,16 @@
+[Unit]
+Description=Prometheus Server
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory={{prometheus_dir}}
+User=prometheus
+Group=prometheus
+ExecStart={{prometheus_dir}}/prometheus --config.file={{prometheus_dir}}/prometheus.yml --log.level=warn --web.enable-admin-api --storage.tsdb.retention.time=7d --storage.tsdb.path={{prometheus_dir}}/data
+ExecReload=/bin/kill -SIGHUP $MAINPID
+ExecStop=/bin/kill -SIGINT $MAINPID
+
+[Install]
+WantedBy=multi-user.target

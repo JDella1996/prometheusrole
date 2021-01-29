@@ -1,0 +1,11 @@
+---
+# tasks file for prometheusrole
+- include_tasks: create_prometheus_user_and_group.yml
+
+- include_tasks: create_prometheus_dir.yml
+
+- include_tasks: download_prometheus.yml
+
+- include_tasks: create_and_configure_prometheus_service.yml
+
+- include_tasks: configure_prometheus.yml

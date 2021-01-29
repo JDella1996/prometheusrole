@@ -1,0 +1,27 @@
+---
+  - name: Ensuring Prometheus user does not exist.
+    user: 
+      name: prometheus
+      state: absent
+    become: true
+
+  - name: Ensuring Prometheus group does not exist.
+    group:
+      name: prometheus
+      state: absent
+    become: true
+
+  - name: Ensure group prometheus exists
+    group:
+      name: prometheus
+      state: present
+    become: true
+    
+  - name: Adding Prometheus User
+    user:
+      name: prometheus
+      comment: prometheus db user
+      group: prometheus
+      uid: "{{prometheus_user_uid}}"
+      state: present
+    become: true

@@ -1,0 +1,28 @@
+---
+  - name: Appending prometheus service to systemd
+    template:
+      src: "{{role_path}}/templates/prometheus.service.j2"
+      dest: "{{services_dir}}/prometheus.service"
+      owner: prometheus
+      group: prometheus
+      mode: '0755'
+    become: true
+    notify: Restart Prometheus
+
+  - name: Enabling Prometheus Service
+    ansible.builtin.systemd:
+      name: prometheus
+      enabled: yes
+      state: started
+      masked: no
+    become: true
+
+  - name: Copying prometheus nodes.yml
+    copy:
+      src: "{{role_path}}/files/nodes.yml"
+      dest: "{{prometheus_dir}}/nodes.yml"
+      owner: prometheus
+      group: prometheus
+      mode: '0755'
+    become: true    
+    notify: Restart Prometheus

@@ -1,0 +1,22 @@
+---
+# handlers file for prometheusrole
+- name: Restart Prometheus
+  service: 
+    name: prometheus
+    state: restarted
+    enabled: true
+  become: true
+
+- name: Stop Prometheus
+  service: 
+    name: prometheus
+    state: stopped
+    enabled: true
+  become: true
+
+- name: Start Prometheus
+  service: 
+    name: prometheus
+    state: started
+    enabled: true
+  become: true

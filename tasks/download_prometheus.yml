@@ -1,0 +1,12 @@
+---
+  - name: Generating custom download script
+    template:
+      src: "{{role_path}}/templates/prometheusdownload.sh.j2"
+      dest: "{{role_path}}/generatedscripts/prometheusdownload.sh"
+      mode: '0755'
+    become: true
+
+  - name: Downloading Prometheus tarball and extracting it, if this fails to download please the proxy scripts
+    script: "{{role_path}}/generatedscripts/prometheusdownload.sh"
+    environment: "{{proxy_env}}"
+    become: true

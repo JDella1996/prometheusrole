@@ -1,0 +1,11 @@
+---
+# vars file for prometheusrole
+
+prometheus_user_uid: 1234
+
+prometheus_dir: /opt/prometheus
+
+services_dir: /etc/systemd/system
+
+proxy_env:
+  https_proxy: ""
